@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="generator" content="AsciiDoc 8.6.9">
+      <title>HCI/CprE/ComS 575: Homework #2</title>
+      <link rel="stylesheet" href="./riak.css" type="text/css">
+   </head>
+   
+   <body class="article">
+      <div id="header">
+         <h1>HCI/CprE/ComS 575: Homework #3</h1>
+         <!-- MAKE CHANGES HERE: Student information -->
+         <span id="author">Karter Krueger</span><br>
+         <span id="email" class="monospaced">&lt;
+         <a href="mailto:Your Email">karterk@iastate.edu</a>&gt;</span><br>
+         <!-- END CHANGES -->
+      </div>
+	  
+      <div id="content">
+	  
+	  <div id="preamble">
+				<div class="sectionbody">
+					<div class="paragraph">
+						<p>
+						Fo your output filed to display in the HTML template, you will have to save/ convert them to  H.264 (*.mp4).
+						<br><br>	
+						If you are having troubles with H.264, try downloading <a href="https://github.com/cisco/openh264/releases">this DLL</a> and placing it in the folder with the binary.
+						<br>
+						Alternatively, you can install <a href="https://ffmpeg.org/">FFMPEG</a> and use it to convert your .avi files to .mp4 using the command below.
+						
+						<div class="listingblock">
+						<div class="title">FFMPEG Command</div>
+						<div class="content">
+							<pre><h4><tt>ffmpeg -i input.m4v -c:a aac -b:a 128k -c:v libx264 -crf 23 output.mp4</tt></h4></pre>
+						</div>
+					</div>
+						
+						<br><br>
+						<strong>Do not waste time on this.</strong>
+						<br><br>
+						If you are unable to get these formats working within a few minutes, you are free to pick a different format or to let OpenCV pick its default - .avi is common.
+						</p>
+					</div>
+					<div class="listingblock">
+						<div class="title">FOURCC codes</div>
+						<div class="content">
+							<!-- Generator: GNU source-highlight 3.1.8
+								by Lorenzo Bettini
+								http://www.lorenzobettini.it
+								http://www.gnu.org/software/src-highlite -->
+							<pre><h4><tt><span style="font-weight: bold"><span style="color: #000000">CV_FOURCC</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'H'</span><span style="color: #990000">,</span><span style="color: #FF0000">'2'</span><span style="color: #990000">,</span><span style="color: #FF0000">'6'</span><span style="color: #990000">,</span><span style="color: #FF0000">'4'</span><span style="color: #990000">);</span> <span style="font-style: italic"><span style="color: #9A1900">// For H.264</span></span>
+</span></tt></h4></pre>
+						</div>
+					</div>
+				</div>
+		</div>
+<!-- ---------------------------------- START PART 1a ---------------------------------- -->
+      <div class="sect1">
+         <h2 id="_part_1a">Part 1a</h2>
+         <div class="sectionbody">
+            <div class="paragraph">
+               <p>
+               Write a program that reads an input video and outputs a grayscale version of the same video. Do this for both movies shown below.
+               Modify the HTML file to link to your output videos such that they show up in the web page  below the original videos. 
+               </p>
+            </div>
+            <table class="tableblock frame-all grid-all" style=" width:100%; ">
+               <col style="width:50%;">
+               <col style="width:50%;">
+               <tbody>
+                  <tr>
+                     <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="video">
+                    <video width="100%" controls>
+                     <source src="part_1a/L1_clip1_12s.m4v" type="video/mp4">
+                     Your browser does not support HTML5 video.
+                    </video>
+                    </span>
+                        </p>
+                     </td>
+                     <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <video width="100%" controls>
+                     <source src="part_1a/L1_clip2_15s.m4v" type="video/mp4">
+                     Your browser does not support HTML5 video.
+                    </video>
+                    </span>
+                        </p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                             <video width="100%" controls>
+                        <!-- MAKE CHANGES HERE: Part 1a video 1 -->
+                        <source src="part_1a/L1_clip1_12s_output.mp4" type="video/mp4">
+                        <!-- END CHANGES -->
+                        Your browser does not support HTML5 video.
+                      </video>
+                           </span>
+                        </p>
+                     </td>
+                     <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                             <video width="100%" controls>
+                        <!-- MAKE CHANGES HERE: Part 1a video 2 -->
+                        <source src="part_1a/L1_clip2_15s_output.mp4" type="video/mp4">
+                        <!-- END CHANGES -->
+                        Your browser does not support HTML5 video.
+                      </video>
+                           </span>
+                        </p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <div class="listingblock">
+               <div class="title">Source</div>
+               <div class="content monospaced">
+                  <!-- MAKE CHANGES HERE: Part 1a OpenCV code -->
+                  <p>Note: change the file name to link your code</p>
+                  <div class="codetext">
+                     <object class="codeobject" type="text/html" data="part_1a/p1a_code.py"></object>
+                  </div>
+                  <!-- END CHANGES -->
+               </div>
+            </div>
+<!-- ----------------------------------- END PART 1a ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 1b ---------------------------------- -->
+<div class="sect1">
+   <h2 id="_part_1b">Part 1b</h2>
+   <div class="sectionbody">
+      <div class="paragraph">
+         <p>
+               Write a program that reads an input video and outputs a modified version of the same video in which the color of all red bricks is changed to orange (use the same RBG for orange as  in the second video). Do this for both movies shown below.
+               Modify the HTML file to link to your output videos such that they show up in the web page below the original videos. 
+         </p>
+      </div>
+      <table class="tableblock frame-all grid-all" style=" width:100%; ">
+         <col style="width:50%;">
+         <col style="width:50%;">
+         <tbody>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="video">
+              <video width="100%" controls>
+               <source src="part_1b/L1_clip1_12s.m4v" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="image">
+                     <video width="100%" controls>
+                           <source src="part_1b/L2_clip2_16s.m4v" type="video/mp4">
+                           Your browser does not support HTML5 video.
+                     </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 1b video 1 -->
+                  <source src="part_1b/L1_clip1_12s_output.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 1b video 2 -->
+                  <source src="part_1b/L2_clip2_16s_output.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="listingblock">
+         <div class="title">Source</div>
+         <div class="content monospaced">
+            <!-- MAKE CHANGES HERE: Part 1b OpenCV code -->
+            <p>Note: change the file name to link your code</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_1b/p1b_code.py"></object>
+            </div>
+            <!-- END CHANGES -->
+         </div>
+      </div>
+<!-- ----------------------------------- END PART 1b ----------------------------------- -->
+
+
+<!-- ---------------------------------- START PART 1c ---------------------------------- -->
+<div class="sect1">
+   <h2 id="_part_1c">Part 1c</h2>
+   <div class="sectionbody">
+      <div class="paragraph">
+         <p>
+         Write a program that reads an input video, changes the color of the ball to red, and also continuously draws the trajectory of the ball for the most recent 2 seconds of video (i.e., from t - 2 sec to t). Do this for both movies shown below.
+               Modify the HTML file to link to your output videos such that they show up in the web page. 
+         </p>
+      </div>
+      <table class="tableblock frame-all grid-all" style=" width:100%; ">
+         <col style="width:50%;">
+         <col style="width:50%;">
+         <tbody>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="video">
+              <video width="100%" controls>
+               <source src="part_1c/L5_clip1_15s.m4v" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="image">
+                     <video width="100%" controls>
+               <source src="part_1c/L5_clip2_12s.m4v" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+            </tr>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 1c video 1 -->
+                  <source src="part_1c/L5_clip1_15s_output.m4v" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 1c video 2 -->
+                  <source src="part_1c/L5_clip2_12s_output.m4v" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="listingblock">
+         <div class="title">Source</div>
+         <div class="content monospaced">
+            <!-- MAKE CHANGES HERE: Part 1c OpenCV code -->
+            <p>Note: change the file name to link your code</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_1c/p1c_code.py"></object>
+            </div>
+            <!-- END CHANGES -->
+         </div>
+      </div>
+<!-- ----------------------------------- END PART 1c ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 1d ---------------------------------- -->
+<div class="sect1">
+   <h2 id="_part_1d">Part 1d</h2>
+   <div class="sectionbody">
+      <div class="paragraph">
+         <p>
+               Write a program that reads the input video and outputs a modified version of the same video in which the number of bricks left in each column is displayed as a number above each column. There are 13 columns, so your program needs to overlay the video with 13 numbers and update them as the bricks disappear. Do this for both videos. Modify the HTML file to link to your output videos such that they show up in the web page. 
+         </p>
+      </div>
+      <table class="tableblock frame-all grid-all" style=" width:100%; ">
+         <col style="width:50%;">
+         <col style="width:50%;">
+         <tbody>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="video">
+              <video width="100%" controls>
+               <source src="part_1d/L2_clip2_10s.m4v" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="image">
+                     <video width="100%" controls>
+                           <source src="part_1d/L2_clip1_16s.m4v" type="video/mp4">
+                           Your browser does not support HTML5 video.
+                     </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 1b video 1 -->
+                  <source src="part_1d/L2_clip2_10s_output.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 1d video 2 -->
+                  <source src="part_1d/L2_clip1_16s_output.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="listingblock">
+         <div class="title">Source</div>
+         <div class="content monospaced">
+            <!-- MAKE CHANGES HERE: Part 1d OpenCV code -->
+            <p>Note: change the file name to link your code</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_1d/p1d_code.py"></object>
+            </div>
+            <!-- END CHANGES -->
+         </div>
+      </div>
+<!-- ----------------------------------- END PART 1d ----------------------------------- -->
+
+
+
+<!-- ---------------------------------- START PART 2a ---------------------------------- -->	  
+<div class="sect1">
+   <h2 id="_part_1">Part 2a</h2>
+   <div class="sectionbody">
+      <div class="paragraph">
+         <p>
+            Write a program that reads an input video, recognizes the eight digits on the  seven-segment displays, and overlays the result video with these same digits but in a different font. Place each recognized digit above its corresponding seven-segment display and update it as the display changes. You can create your own structuring elements for the digits (e.g., by cropping digits from the video).   
+         </p>
+      </div>
+      <table class="tableblock frame-all grid-all" style=" width:100%; ">
+         <tbody>
+
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="video">
+              <video width="100%" controls>
+               <source src="part_2a/input2a_small.mp4" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+               
+            </tr>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 2a  -->
+                  <source src="part_2a/with_numbers.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="listingblock">
+         <div class="title">Source</div>
+         <div class="content monospaced">
+            <!-- MAKE CHANGES HERE: Part 2a OpenCV code -->
+            <p>Note: change the file name to link your code</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_2a/p2a_code.py"></object>
+            </div>
+            <!-- END CHANGES -->
+         </div>
+      </div>
+
+<!-- ----------------------------------- END PART 2a ----------------------------------- -->
+<!-- ---------------------------------- START PART 2b ---------------------------------- -->	  
+<div class="sect1">
+   <h2 id="_part_2b">Part 2b</h2>
+   <div class="sectionbody">
+      <div class="paragraph">
+         <p>
+            Write a program that reads the input video and detects which red and green LEDs are on.  There are 18 red and 8 green LEDs. Overlay the output video with a 0 or 1 digit below each LED such that 0 signifies off and 1 signifies on. Update these digits as the sate of the corresponding LED changes.  You can assume that the four LEDs after the first six LEDs (from left to right) are always off.
+           </p>
+      </div>
+      <table class="tableblock frame-all grid-all" style=" width:100%; ">
+         <tbody>
+
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="video">
+              <video width="100%" controls>
+               <source src="part_2b/input2b_small.mp4" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+               
+            </tr>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 2b -->
+                  <source src="part_2b/with_binary.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="listingblock">
+         <div class="title">Source</div>
+         <div class="content monospaced">
+            <!-- MAKE CHANGES HERE: Part 2b OpenCV code -->
+            <p>Note: change the file name to link your code</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_2b/p2b_code.py"></object>
+            </div>
+            <!-- END CHANGES -->
+         </div>
+      </div>
+
+<!-- ----------------------------------- END PART 2b ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 2c ---------------------------------- -->	  
+<div class="sect1">
+   <h2 id="_part_2c">Part 2c</h2>
+   <div class="sectionbody">
+      <div class="paragraph">
+         <p>
+            Write a program that combines what you did in parts 2a and 2b. In addition, your program must also output a text file that contains one line for each change of the state of the rightmost green LED (from On to Off or vice versa).  The format of the text file should be as follows: 6-bit binary number (the first 6 red LEDs), TAB, an 8-bit binary number (the last 8 red LEDs), TAB,  a 2-bit binary number (green LEDs 3 and 4 from left to right), TAB, 2-bit binary number (the last two green LEDs), new line. 
+       </p>
+      </div>
+      <table class="tableblock frame-all grid-all" style=" width:100%; ">
+         <tbody>
+
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="video">
+              <video width="100%" controls>
+               <source src="part_2c/input2c_small.mp4" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+               
+            </tr>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 2c  -->
+                  <source src="part_2c/with_both.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="listingblock">
+         <div class="title">Source</div>
+         <div class="content monospaced">
+            <!-- MAKE CHANGES HERE: Part 2c OpenCV code -->
+            <p>Note: change the file name to link your code</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_2c/p2c_code.py"></object>
+            </div>
+             <p>Put the contents of your output file here</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_2c/p2c_output.txt"></object>
+            </div>
+            <!-- END CHANGES -->
+         </div>
+      </div>
+
+<!-- ----------------------------------- END PART 2c ----------------------------------- -->
+
+
+<!-- ---------------------------------- START PART ec1 ---------------------------------- -->	  
+<div class="sect1">
+   <h2 id="_part_ec1">Extra Credit 1</h2>
+   <div class="sectionbody">
+      <div class="paragraph">
+         <p>
+            Repeat the task from part 2c for the video shown below in which the camera moves over time. Hint: you may need to stabilize the image before processing.
+         </p>
+      </div>
+      <table class="tableblock frame-all grid-all" style=" width:100%; ">
+         <tbody>
+
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock"><span class="video">
+              <video width="100%" controls>
+               <source src="part_ec1/inputec1_small.mp4" type="video/mp4">
+               Your browser does not support HTML5 video.
+              </video>
+              </span>
+                  </p>
+               </td>
+               
+            </tr>
+            <tr>
+               <td class="tableblock halign-left valign-top" >
+                  <p class="tableblock">
+                     <span class="image">
+                       <video width="100%" controls>
+                  <!-- MAKE CHANGES HERE: Part 2a video 2 -->
+                  <source src="part_ec1/with_numbers.mp4" type="video/mp4">
+                  <!-- END CHANGES -->
+                  Your browser does not support HTML5 video.
+                </video>
+                     </span>
+                  </p>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="listingblock">
+         <div class="title">Source</div>
+         <div class="content monospaced">
+            <!-- MAKE CHANGES HERE: Part ec1 OpenCV code -->
+            <p>Note: change the file name to link your code</p>
+            <div class="codetext">
+               <object class="codeobject" type="text/html" data="part_ec1/ec1_code.py"></object>
+            </div>
+            <!-- END CHANGES -->
+         </div>
+      </div>
+
+<!-- ----------------------------------- END PART ec1 ----------------------------------- -->
+
+
+
+
+         
+      <div id="footer">
+         <div id="footer-text">
+            Last updated 2019-02-16
+         </div>
+      </div>
+   </body>
+</html>

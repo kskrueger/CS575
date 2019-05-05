@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="generator" content="AsciiDoc 8.6.9">
+      <title>HCI/CprE/ComS 575: Homework #4</title>
+      <link rel="stylesheet" href="./riak.css" type="text/css">
+   </head>
+   
+   <body class="article">
+      <div id="header">
+         <h1>HCI/CprE/ComS 575: Homework #4</h1>
+         <!-- MAKE CHANGES HERE: Student information -->
+         <span id="author">Karter Krueger</span><br>
+         <span id="email" class="monospaced">&lt;
+         <a href="mailto:Your Email">karterk@iastate.edu</a>&gt;</span><br>
+         <!-- END CHANGES -->
+      </div>
+	  
+      <div id="content">
+	  
+	  <div id="preamble">
+				<div class="sectionbody">
+					<div class="paragraph">
+						<p>
+						List of Audio Libraries and References
+						</p>
+					</div>
+					<div class="paragraph">
+						<p>
+						The following list of C / C++ libraries and references for audio processing is provided for your convenience only.
+						You are not required to use any of these libraries / references for this homework.
+						<br><br>
+						<ul>
+							<li class="level1">
+								<div class="li"> <a href="http://www.fftw.org/" class="urlextern" title="http://www.fftw.org/" rel="nofollow"> Fastest Fourier Transform in the West</a> library.</div>
+							</li>
+							<li class="level1">
+								<div class="li"> <a href="http://www.youtube.com/view_play_list?p=B24BC7956EE040CD" class="urlextern" title="http://www.youtube.com/view_play_list?p=B24BC7956EE040CD" rel="nofollow"> The Fourier Transform and its Applications: A Video Course</a>. </div>
+							</li>
+							<li class="level1">
+								<div class="li"> <a href="http://kissfft.sourceforge.net/" class="urlextern" title="http://kissfft.sourceforge.net/" rel="nofollow"> Keep It Simple, Stupid FFT</a> library.</div>
+							</li>
+							<li class="level1">
+								<div class="li"> <a href="https://www.audacityteam.org/" class="urlextern" title="https://www.audacityteam.org/" rel="nofollow"> Audacity</a>. Useful for analyzing raw audio (waves) and modifying audio files (ie. stereo <--> mono).</div>
+					</div>
+				</div>
+		</div>
+	  
+		<br>
+		<hr>
+		<br>
+	 
+	     <!-- PART 1A -->
+         <div class="sect1">
+            <h2 id="_part_1a">Part 1a: Slow DFT</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>
+				  Implement the Discrete Fourier Transform (DFT) in C, C++, MATLAB, Java, or Python. Implement the <B>slow</B> version that multiplies the transform matrix by the input vector in O(N<sup>2</sup>) time. Your code should support input vectors of size up to 1024.
+                  </p>
+               </div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 1a code -->
+                     <pre>
+import cmath
+import numpy as np
+
+
+# Part 1a: Slow DFT
+def slow_dft(input_x):
+    N = len(input_x)
+    out = []
+    for k in range(N):
+        z = complex(0)
+        for n in range(N):
+            exponent = 2j * cmath.pi * k * n / N
+            z += input_x[n] * cmath.exp(-exponent)
+        out.append(z)
+    return out
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+
+	     <!-- PART 1B -->
+         <div class="sect1">
+            <h2 id="_part_1b">Part 1b: Slow IDFT</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>
+				  Implement the Inverse Discrete Fourier Transform (IDFT) in C, C++, MATLAB, Java, or Python. Implement the <B>slow</B> version that multiplies the transform matrix by the input vector in O(N<sup>2</sup>) time. Your code should support input vectors of size up to 1024.
+                  </p>
+               </div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 1b code -->
+                     <pre>
+import cmath
+import numpy as np
+
+
+# Part 1b: Slow IDFT
+def slow_idft(input_X):
+    N = len(input_X)
+    out = []
+    for k in range(N):
+        z = complex(0)
+        for n in range(N):
+            exponent = 2j * cmath.pi * k * n / N
+            z += input_X[n] * cmath.exp(exponent)
+        out.append(1 / N * z)
+    return out
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+
+	  
+		<br>
+		<hr>
+		<br>
+                
+	  
+		 <!-- PART 2A -->
+         <div class="sect2">
+            <h2 id="_part_2a">Part 2a: FFT</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>
+				  Implement the Fast Fourier Transform (FFT) in C, C++, MATLAB, Java, or Python. Implement the <B>fast</B> version that uses recursion and runs in O(n log<sub>2</sub> n) time. Note that you are <strong>not</strong> allowed to use 
+				  MATLAB's implementation nor any other existing library for this problem. Your code should support input vectors of size up to 1024. Use your code from Part 1a to cross-check your implementation.
+                  </p>
+               </div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 2a code -->
+                     <pre>
+import cmath
+import numpy as np
+
+
+# Part 2a: FFT
+def recursive_fft(input_x):
+    x = np.asarray(input_x, dtype=float)
+    N = x.shape[0]
+
+    if N is 1:
+        return x
+    else:
+        even = recursive_fft(x[::2])
+        odd = recursive_fft(x[1::2])
+        factor = np.exp(-2j * np.pi * np.arange(N) / N)
+        # combine two halves
+        return np.concatenate([even + factor[:N // 2] * odd, even + factor[N // 2:] * odd])
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+	
+		 <!-- PART 2B -->
+         <div class="sect2">
+            <h2 id="_part_2b">Part 2b: IFFT</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>
+				  Implement the Inverse Fast Fourier Transform (IFFT) in C, C++, MATLAB, Java, or Python. Implement the <B>fast</B> version that uses recursion and runs in O(n log<sub>2</sub> n) time. Note that you are <strong>not</strong> allowed to use 
+				  MATLAB's implementation nor any other existing library for this problem. Your code should support input vectors of size up to 1024. Use your code from Part 1b to cross-check your implementation.
+                  </p>
+               </div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 2b code -->
+                     <pre>
+import cmath
+import numpy as np
+
+
+# Part 2b: IFFT
+def recursive_sub_ifft(input_x):
+    x = np.asarray(input_x, dtype=float)
+    N = x.shape[0]
+
+    if N is 1:
+        return x
+    else:
+        even = recursive_sub_ifft(x[::2])
+        odd = recursive_sub_ifft(x[1::2])
+        # numpy arange(N) gets the list of N
+        factor = np.exp(2j * np.pi * np.arange(N) / N)
+        # combine two halves using numpy to combine them as it iterates through the halves
+        return np.concatenate([even + factor[:N // 2] * odd, even + factor[N // 2:] * odd])
+
+
+# call this method, so the values will be normalized at the end
+def ifft(input_x):
+    return recursive_sub_ifft(input_x) / len(input_x)
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+               
+ 	  
+		<br>
+		<hr>
+		<br>              	
+			   
+        <!-- PART 3A -->       
+		<div class="sect3">
+            <h2 id="_part_3a">Part 3a: FFT check</h2>
+            <div class="sectionbody">
+                <div class="paragraph">
+                  <p>
+				  Using your implementation from Part 2a, compute the Discrete Fourier Transform of the following vector:
+				  </p>
+                </div>
+			    <div class="listingblock">
+						<div class="title">Vector 'x'</div>
+						<div class="content">
+							<pre><h4><tt>[0, 0.7071, 1, 0.7071, 0, -0.7071, -1, -0.7071]</tt></h4></pre>
+						</div>
+				</div>
+				<div class="paragraph">
+                  <p>
+				  <i>Note: you may want to use sqrt(2)/2 instead of 0.7071.</i>
+				  </p>
+                </div>
+			   <div class="listingblock">
+                  <div class="title">Result</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 3a results -->
+                     <pre>
+[ 0.00000000e+00+0.00000000e+00j  5.77996267e-16-3.99998082e+00j
+  0.00000000e+00+0.00000000e+00j  6.52527927e-17+1.91800920e-05j
+  0.00000000e+00+0.00000000e+00j -1.99159850e-16-1.91800920e-05j
+  0.00000000e+00+0.00000000e+00j -1.15599253e-15+3.99998082e+00j]
+
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+               <div class="paragraph">
+                  <p>
+				  Compare your output with the output generated by MATLAB's fft() method for the same vector 'x'. Include the result below, and any discrepancies. You may also use one of the FFT libraries above, if you choose.
+				  </p>
+                </div>
+			   <div class="listingblock">
+                  <div class="title">Matlab Result & Analysis</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 1c results -->
+                     <pre>
+[ 0.00000000e+00+0.00000000e+00j -2.22044605e-16-3.99998082e+00j
+  0.00000000e+00+0.00000000e+00j -2.22044605e-16+1.91800920e-05j
+  0.00000000e+00+0.00000000e+00j  2.22044605e-16-1.91800920e-05j
+  0.00000000e+00+0.00000000e+00j  2.22044605e-16+3.99998082e+00j]
+
+##### NOTE #####
+# when tested using the numpy "allclose()" function, it returns true that this vector result is very close to the actual vector using a built-in  function
+print(np.allclose(recursive_fft(vect), np.fft.fft(vect)))
+
+# additionally, when tested using a randomly generated input of a vector of size 1024, it also passes this test as true
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+			   
+			   
+			   
+        <!-- PART 3B -->       
+		<div class="sect3">
+            <h2 id="_part_3b">Part 3b: IFFT check</h2>
+            <div class="sectionbody">
+                <div class="paragraph">
+                  <p>
+				  Using your implementation from Part 2b, compute the inverse Discrete Fourier Transform of the following vector:
+				  </p>
+                </div>
+			    <div class="listingblock">
+						<div class="title">Vector 'X'</div>
+						<div class="content">
+							<pre><h4><tt>[0, -4i, 0, 0, 0, 0, 0, 4i]</tt></h4></pre>
+						</div>
+				</div>
+			   <div class="listingblock">
+                  <div class="title">Result</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 3b results -->
+                     <pre>
+[ 0.        +0.00000000e+00j  0.70710678-1.11022302e-16j
+  1.        -1.22464680e-16j  0.70710678-1.66533454e-16j
+  0.        +0.00000000e+00j -0.70710678+1.66533454e-16j
+ -1.        +2.44929360e-16j -0.70710678+2.22044605e-16j]
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+            <div class="sectionbody">
+                <div class="paragraph">
+                  <p>
+				  Compare your output with the output generated by MATLAB's ifft() method for the same vector 'X'. Include the result below, and any discrepancies. You may also use one of the IFFT libraries above, if you choose.
+				  </p>
+                </div>
+			   <div class="listingblock">
+                  <div class="title">Result & Analysis</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 3b results -->
+                     <pre>
+[ 0.        +0.00000000e+00j  0.70710678+5.55111512e-17j
+  1.        +0.00000000e+00j  0.70710678+5.55111512e-17j
+  0.        +0.00000000e+00j -0.70710678-5.55111512e-17j
+ -1.        +0.00000000e+00j -0.70710678-5.55111512e-17j]
+
+##### NOTE #####
+# when tested using the numpy "allclose()" function, it returns TRUE that this vector result is very close to the actual vector using a built-in  function
+print(np.allclose(ifft(X), np.fft.ifft(X)))
+
+# additionally, when tested using a randomly generated input of a vector of size 1024, it also passes this test as true
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+			   
+		<br>		<hr>
+		<br>
+			   
+		<!-- PART 4 -->
+        <div class="sect4">
+            <h2 id="_part_4">Part 4</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>Using any FFT and IFFT  implementation, compute and plot the spectrograms for the following 3 audio files.
+In case you are curious, those audio snippets came from the game that was used in HW3.				  
+		          </p>
+               </div>
+               <div class="level2">
+			<div class="table sectionedit4">
+				<table class="inline">
+					<thead>
+						<tr class="row0">
+							<th class="col0"> Audio Data </th>
+							<th class="col1"> Spectrogram </th>
+						</tr>
+					</thead>
+					<tr class="row1">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_4/ball_bounce_brick_mono.wav" type="audio/wav" />
+								<a href="input/Part_4/ball_bounce_brick_mono.wav" class="media mediafile mf_wav" title="ball_bounce_brick_mono">ball_bounce_brick_mono</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 4 Spectrogram -->
+								<img src="output/Part_4/ball_bounce_brick_mono_plot2.jpg" alt="Spectrogram1" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+					<tr class="row2">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_4/ball_bounce_paddle_mono.wav" type="audio/wav" />
+								<a href="input/Part_4/ball_bounce_paddle_mono.wav" class="media mediafile mf_wav" title="ball_bounce_paddle_mono">ball_bounce_paddle_mono</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 4 Spectrogram -->
+								<img src="output/Part_4/ball_bounce_paddle_mono_plot2.jpg" alt="Spectrogram2" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+					<tr class="row3">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_4/paddle_widening_mono.wav" type="audio/wav" />
+								<a href="input/Part_4/paddle_widening_mono.wav" class="media mediafile mf_wav" title="paddle_widening_mono">paddle_widening_mono</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 4 Spectrogram -->
+								<img src="output/Part_4/paddle_widening_mono_plot2.jpg" alt="Spectrogram3" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 4 code -->
+                     <pre>
+[Y,fs]=audioread('ball_bounce_brick_mono.wav'); % read the WAV file
+figure;
+plot(1:1000,Y(1:1000), 'b.')     % plot the first 1000 samples
+xlabel('Sample number (only the first 1000)');
+ylabel('Y');
+title('The wave for a the sound');
+
+figure; spectrogram(Y, 512, 256, 512, fs, 'yaxis');
+title('Spectrogram for the sound');
+
+S=spectrogram(Y, 512, 256, 512, fs, 'yaxis');
+sound(Y, fs)
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+			   
+		<br>
+		<hr>
+		<br>
+			   
+
+
+		<!-- PART 5 -->
+        <div class="sect5">
+            <h2 id="_part_5">Part 5</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                <p>Repeat what you did in part 4, but now process three audio files that you recorded while playing your favorite game. Describe how you recorded the audio and what parameters were used (e.g., sampling frequency, duration). Also, describe the parameters that you used to compute the spectrograms (you can put this in the comments for your code). Modify the HTML template so that you files are linked and your spectrograms are show to the right of each audio file.
+		          </p>
+               </div>
+               <div class="level2">
+			<div class="table sectionedit4">
+				<table class="inline">
+					<thead>
+						<tr class="row0">
+							<th class="col0"> Audio Data </th>
+							<th class="col1"> Spectrogram </th>
+						</tr>
+					</thead>
+					<tr class="row1">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_5/MC_redstone_mono.wav" type="audio/wav" />
+								<a href="input/Part_5/MC_redstone_mono.wav" class="media mediafile mf_wav" title="sound1">sound1</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 5 Spectrogram -->
+								<img src="output/Part_5/MC_redstone_mono_plot2.jpg" alt="Spectrogram1" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+					<tr class="row2">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_5/MC_water_mono.wav" type="audio/wav" />
+								<a href="input/Part_5/MC_water_mono.wav" class="media mediafile mf_wav" title="sound2">sound2</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 5 Spectrogram -->
+								<img src="output/Part_5/MC_water_mono_plot2.jpg" alt="Spectrogram2" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+					<tr class="row3">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_5/MC_animal_mono.wav" type="audio/wav" />
+								<a href="input/Part_5/MC_animal_mono.wav" class="media mediafile mf_wav" title="sound3">sound3</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 5 Spectrogram -->
+								<img src="output/Part_5/MC_animal_mono_plot2.jpg" alt="Spectrogram3" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 5 code -->
+                     <pre>
+[Y,fs]=audioread('MC_water_mono.wav'); % read the WAV file
+figure;
+plot(1:1000,Y(1:1000), 'b.')     % plot the first 1000 samples
+xlabel('Sample number (only the first 1000)');
+ylabel('Y');
+title('The wave for the sound');
+
+figure; spectrogram(Y, 512, 256, 512, fs, 'yaxis');
+title('Spectrogram for the sound');
+
+S=spectrogram(Y, 512, 256, 512, fs, 'yaxis');
+sound(Y, fs)
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+			   
+		<br>
+		<hr>
+		<br>
+		
+		
+		
+
+
+
+		<!-- PART 6 -->
+        <div class="sect6">
+            <h2 id="_part_6">Part 6</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                <p>Synthesize the dial tones for three different area codes (only 3 digits). Save these as audio files and link to them in the HTML template. Then plot the spectrograms for each audio file. 
+		          </p>
+               </div>
+               <div class="level2">
+			<div class="table sectionedit4">
+				<table class="inline">
+					<thead>
+						<tr class="row0">
+							<th class="col0"> Audio Data </th>
+							<th class="col1"> Spectrogram </th>
+						</tr>
+					</thead>
+					<tr class="row1">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_6/319.wav" type="audio/wav" />
+								<a href="input/Part_6/319.wav" class="media mediafile mf_wav" title="areacode1">areacode1</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 6 Spectrogram -->
+								<img src="output/Part_6/319_plot2.jpg" alt="Spectrogram1" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+					<tr class="row2">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_6/471.wav" type="audio/wav" />
+								<a href="input/Part_6/471.wav" class="media mediafile mf_wav" title="areacode2">areacode2</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 6 Spectrogram -->
+								<img src="output/Part_6/471_plot2.jpg" alt="Spectrogram2" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+					<tr class="row3">
+						<td class="col0">
+							<audio class="media" controls="controls">
+								<source src="input/Part_6/987.wav" type="audio/wav" />
+								<a href="input/Part_6/987.wav" class="media mediafile mf_wav" title="areacode3">areacode3</a>
+							</audio>
+						</td>
+						<td class="col1">
+							<span class="image">
+								<!-- MAKE CHANGES HERE: Part 6 Spectrogram -->
+								<img src="output/Part_6/987_plot2.jpg" alt="Spectrogram3" width="100%">
+								<!-- END CHANGES -->
+                            </span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 6 code -->
+                     <pre>
+fs = 44100;  % sampling frequency
+
+% dial area code 319
+dialAreaCode = dial_number('319', 0.5, 0.25, fs);
+sound(dialAreaCode, fs);
+audiowrite('319.wav', dialAreaCode, fs);
+
+[Y,fs]=audioread('319.wav'); % read the WAV file
+figure;
+plot(1:2500,Y(1:2500), 'b.')     % plot the first 1000 samples
+xlabel('Sample number (only the first 1000)');
+ylabel('Y');
+title('The wave for a dial tone area code');
+
+figure; spectrogram(Y, 512, 256, 512, fs, 'yaxis');
+title('Spectrogram for 319 area code');
+
+S=spectrogram(Y, 512, 256, 512, fs, 'yaxis');
+
+function [wave] = dial_number(dialedNumber, dialLength, pauseLength, samplingFreq)
+
+    % Setup Pause Time
+	pauseTime = 0 : 1/samplingFreq : pauseLength;
+	pauseWave = sin(pauseTime);
+
+	wave = 0;
+	for i = 1 : length(dialedNumber)
+		wave = [wave dial_digit(dialedNumber(i), dialLength, samplingFreq)];
+		wave = [wave pauseWave];
+	end
+end
+
+function [ dialedWave ] = dial_digit(dialKey, time, samplingFreq)
+% Returns a wave of the dialed digit
+% dialKey can be { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '#'}
+% time can be (0, ... , infinite) in seconds
+
+	% Setup Frequency Matrix
+	freqRow = [697 770 852 941];
+	freqCol = [1209 1336 1477];
+
+	% Get Frequency Location of dialedNumber
+	switch dialKey
+		case '1'
+			row = 1;
+			col = 1;
+		case '2'
+			row = 1;
+			col = 2;
+		case '3'
+			row = 1;
+			col = 3;
+		case '4'
+			row = 2;
+			col = 1;
+		case '5'
+			row = 2;
+			col = 2;
+		case '6'
+			row = 2;
+			col = 3;
+		case '7'
+			row = 3;
+			col = 1;
+		case '8'
+			row = 3;
+			col = 2;
+		case '9'
+			row = 3;
+			col = 3;
+		case '*'
+			row = 4;
+			col = 1;
+		case '0'
+			row = 4;
+			col = 2;
+		case '#'
+			row = 4;
+			col = 3;
+		otherwise
+			disp('Please enter a valid dial key.')
+			return;
+	end
+
+	% Create time interval from 0 to time
+	t = 0 : 1/samplingFreq : time;
+
+	% Calculate corresponding row and column waves
+	rowWave = sin(2 * pi * freqRow(row) * t);
+	colWave = sin(2 * pi * freqCol(col) * t);
+
+	% Calculate final wave
+	dialedWave = (rowWave + colWave) / 2;
+	return;
+end
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+			   
+		<br>
+		<hr>
+		<br>
+		
+		
+		
+		
+		
+		
+	  <!-- PART 7 -->
+         <div class="sect7">
+            <h2 id="_part_7">Part 7: Find Published FFT and IFFT Algorithms</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>
+                  Find at least 5 instances of published FFT algorithms AND at least 5 instances of published IFFT algorithms. For this to count, your source must be a published book. Also, for each instance, you must find either a complete algorithm in pseudo code or a complete source code (in any language). Math only descriptions don't count. 
+                    </P>
+                    <P> For each instance, submit a picture or a scanned copy of the page(s) with the algorithm, the page of the book that contains the title and the author name(s), and the page that contains the edition and the book's ISBN number. 
+                    </P>                    
+                  <p>                
+                  Warning: to solve this part you may need to visit to the library! 
+                 </p>
+                  <p> Insert links to your images here:
+				   Lots of images... shared a google upload link rather than pushing canvas...
+					  <div class="li"> <a href="https://photos.app.goo.gl/43PVud8cca41Sr178" class="urlextern" title="https://photos.app.goo.gl/43PVud8cca41Sr178" rel="nofollow">https://photos.app.goo.gl/43PVud8cca41Sr178</a></div></P>
+               </div>
+			  <br>
+  		  	  <hr>
+			  <br>
+			  
+		
+        <h1 id="_ec">Extra Credit</h1>		
+
+	     <!-- PART EC1 -->
+         <div class="sectEC1">
+            <h2 id="_part_ec1">Part EC1: Corrections to Published Algorithms</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>
+				  While collecting sources for part 7, if you find any published algorithms that contain errors, please correct the errors (but don't write them in the book) and submit the corrections.  You get 1% extra credit for each error that you find. The submission instructions are the same as in part 7, but write the corrections in red on the scanned page.
+                  </p>
+                  <p> Insert links to your images here.</P>
+               </div>
+			  <br>
+               		
+		
+	     <!-- PART EC2 -->
+         <div class="sectEC2">
+            <h2 id="_part_ec2">Part EC2: Non-Recursive FFT</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>
+				  Implement a <B>non-recursive</B> version of the Fast Fourier Transform (FFT) in C, C++, MATLAB, Java, or Python. This is the <B>iterative</B> version of the algorithm that still runs in O(N log<sub>2</sub>N) time, but does not use recursion. Your code should support input vectors of size up to 1024. Once again, this must be your own implementation. Run you code on the vector from part 3a and report the result.
+                  </p>
+               </div>
+			   <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part EC2 code -->
+                     <pre>
+// Insert your code here
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+               <div class="listingblock">
+                  <div class="title">Result</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part EC2 results -->
+                     <pre>
+// Insert your resulting vector here
+					 </pre>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+               
+			  <br>
+			  <br>
+
+		   
+      <div id="footer">
+         <div id="footer-text">
+            Last updated 2019-03-07
+         </div>
+      </div>
+   </body>
+</html>

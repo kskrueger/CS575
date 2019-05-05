@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="generator" content="AsciiDoc 8.6.9">
+      <title>HCI/CprE/ComS 575: Homework #2</title>
+      <link rel="stylesheet" href="./riak.css" type="text/css">
+   </head>
+   <body class="article">
+      <div id="header">
+         <h1>HCI/CprE/ComS 575: Homework #2</h1>
+         <!-- MAKE CHANGES HERE: Student information -->
+         <span id="author">Karter Krueger</span><br>
+         <span id="email" class="monospaced">&lt;
+         <a href="mailto:Your Email">karterk@iastate.edu</a>&gt;</span><br>
+         <!-- END CHANGES -->
+      </div>
+      <div id="content">
+         <div id="preamble">
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>Supplementary files for this homework are posted on 
+                     <a href="http://www.ece.iastate.edu/~alexs/classes/2019_Spring_575">the class web page</a>.
+                  </p>
+               </div>
+            </div>
+         </div>
+
+<!-- ---------------------------------- START PART 1 ---------------------------------- -->
+         <div class="sect1">
+            <h2 id="_part_1">Part 1</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>Write a program that uses basic morphological operations to identify and crop the grid in the image shown below. 
+                     The result image should contain only the pixels inside the grid, including the outer border. Edit
+                     the web template to display your result image and the computer code that was used to generate it for this and all subsequent parts.
+                     You must solve part1 using Matlab <strong>and</strong> OpenCV.
+                  </p>
+               </div>
+               <div class="sect2">
+                  <h3 id="_matlab">Matlab</h3>
+                  <table class="tableblock frame-all grid-all" style=" width:100%; ">
+                     <col style="width:50%;">
+                     <col style="width:50%;">
+                     <tbody>
+                        <tr>
+                           <td class="tableblock halign-left valign-top" >
+                              <p class="tableblock"><span class="image">
+                                 <img src="Part_1/p1_search.png" alt="Part_1/p1_search.png" width="100%">
+                                 </span>
+                              </p>
+                           </td>
+                           <td class="tableblock halign-left valign-top" >
+                              <p class="tableblock">
+                                 <span class="image">
+                                    <!-- MAKE CHANGES HERE: Part 1 MATLAB Handle -->
+                                    <img src="Part_1/out.jpg" alt="out.jpg" width="100%">
+                                    <!-- END CHANGES -->
+                                 </span>
+                              </p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <div class="listingblock">
+                     <div class="title">Source</div>
+                     <div class="content monospaced">
+                        <div class="codetext">
+                           <!-- MAKE CHANGES HERE: Part 1 Matlab code -->
+                           <object class="codeobject" type="text/html" data="Part_1/p1.m"></object>
+                           <!-- END CHANGES -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="sect3">
+                  <h3 id="_opencv">OpenCV</h3>
+                  <table class="tableblock frame-all grid-all" style=" width:100%; ">
+                     <col style="width:50%;">
+                     <col style="width:50%;">
+                     <tbody>
+                        <tr>
+                           <td class="tableblock halign-left valign-top" >
+                              <p class="tableblock"><span class="image">
+                                 <img src="Part_1/p1_search.png" alt="p1_search.png" width="100%">
+                                 </span>
+                              </p>
+                           </td>
+                           <td class="tableblock halign-left valign-top" >
+                              <p class="tableblock">
+                                 <span class="image">
+                                    <!-- MAKE CHANGES HERE: Part 1 OpenCV Handle -->
+                                    <img src="Part_1/p1_output.png" alt="Handle" width="100%">
+                                    <!-- END CHANGES -->
+                                 </span>
+                              </p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <div class="listingblock">
+                     <div class="title">Source</div>
+                     <div class="content monospaced">
+                        <!-- MAKE CHANGES HERE: Part 1 OpenCV code -->
+                        <p>Note: change the file name if necessary to link your code</p>
+                        <div class="codetext">
+                           <object class="codeobject" type="text/html" data="Part_1/p1_code.py"></object>
+                        </div>
+                        <!-- END CHANGES -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+<!-- ---------------------------------- END PART 1 ---------------------------------- -->
+
+<!-- ---------------------------------- START PART 2 ---------------------------------- -->
+         <div class="sect1">
+            <h2 id="_part_2">Part 2</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>Write a program that starts by cropoing the grid (as was done in part1) and then separates the grid from the letters. 
+                     Output two images: one that contains only the grid without any letters and another that contains only the letters without the grid (note that all letters outside the grid were already cropped and should not appear in the result image).
+							Solve this and all subsequent problems using either MATLAB <strong>or</strong> OpenCV.
+                  </p>
+               </div>
+               <table class="tableblock frame-all grid-all" style=" width:100%; ">
+                  <col style="width:33%;">
+                  <col style="width:33%;">
+                  <col style="width:33%;">
+                  <tbody>
+                     <tr>
+                        <td class="tableblock halign-left valign-top" colspan="2">
+                           <p class="tableblock"><span class="image">
+                              <img src="Part_2/p2_search.png" alt="p2_search.png" width="100%">
+                              </span>
+                           </p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="tableblock halign-left valign-top" >
+                           <p class="tableblock">
+                              <span class="image">
+                                 <!-- MAKE CHANGES HERE: Part 2 grid image -->
+                                 <img src="Part_2/grid_only.png" alt="grid_only.png" width="100%">
+                                 <!-- END CHANGES -->
+                              </span>
+                           </p>
+                        </td>
+                        <td class="tableblock halign-left valign-top" >
+                           <p class="tableblock">
+                              <span class="image">
+                                 <!-- MAKE CHANGES HERE: Part 2 letter image -->
+                                 <img src="Part_2/letters_only.png" alt="letters_only.jpg" width="100%">
+                                 <!-- END CHANGES -->
+                              </span>
+                           </p>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 2 code -->
+                     <div class="codetext">
+                        <object class="codeobject" type="text/html" data="Part_2/p2_code.py"></object>
+                     </div>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+            </div>
+         </div>
+<!-- ----------------------------------- END PART 2 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 3 ---------------------------------- -->
+         <div class="sect1">
+            <h2 id="_part_3">Part 3</h2>
+            <div class="sectionbody">
+               <div class="paragraph">
+                  <p>Find and mark all small squares in the empty grid. Color each square using a random color.</p>
+               </div>
+               <table class="tableblock frame-all grid-all" style=" width:100%; ">
+                  <col style="width:50%;">
+                  <col style="width:50%;">
+                  <col style="width:50%;">
+                  <tbody>
+                     <tr>
+                        <td class="tableblock halign-left valign-top" >
+                              <p class="tableblock"><span class="image">
+                                 <img src="Part_3/p3_search.png" alt="p3_search.png" width="100%">
+                                 </span>
+                              </p>
+                        </td>
+                        <td class="tableblock halign-left valign-top" >
+                           <p class="tableblock">
+                              <span class="image">
+                                 <!-- MAKE CHANGES HERE: Part 3 image -->
+                                 <img src="Part_3/p3_colors.png" alt="p3_colors.png" width="100%">
+                                 <!-- END CHANGES -->
+                              </span>
+                           </p>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="listingblock">
+                  <div class="title">Source</div>
+                  <div class="content monospaced">
+                     <!-- MAKE CHANGES HERE: Part 3 code -->
+                     <div class="codetext">
+                        <object class="codeobject" type="text/html" data="Part_3/p3_code.py"></object>
+                     </div>
+                     <!-- END CHANGES -->
+                  </div>
+               </div>
+            </div>
+         </div>
+<!-- ----------------------------------- END PART 3 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 4 ---------------------------------- -->
+<div class="sect1">
+      <h2 id="_part_4">Part 4</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Find all 'A' letters within the grid and color them red.</p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_4/p4_search.png" alt="p3_search.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 4 image -->
+                           <img src="Part_4/colored_a.png" alt="colored_a.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Part 4 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="Part_4/p4_code.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END PART 4 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 5 ---------------------------------- -->
+
+<div class="sect1">
+      <h2 id="_part_5">Part 5</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Find and color all vowels within the grid (A, E, I, O, U, Y). Color each vowel in a different color.</p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_5/p5_search.png" alt="p5_search.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 5 image -->
+                           <img src="Part_5/colored_vowels.png" alt="colored_vowels.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Part 5 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="Part_5/p5_code.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END PART 5 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 6 ---------------------------------- -->
+<div class="sect1">
+      <h2 id="_part_6">Part 6</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Find all letters within the grid. Color each letter in a different random color. Identical letters must have the same color.</p>
+             <p> Cutouts of all 26 letters used in the word search puzzles can be found in the Letter_Cutouts folder.</p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_6/p6_search.png" alt="p5_search.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 6 image -->
+                           <img src="colored.png" alt="colored.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Part 6 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="p6_code.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END PART 6 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 7 ---------------------------------- -->
+<div class="sect1">
+      <h2 id="_part_7">Part 7</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Replace all letters within the grid with the same letter but in a different font.</p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_7/p7_search.png" alt="p7_search.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 7 image -->
+                           <img src="new_font.png" alt="new_font.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Part 7 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="p7_code.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END PART 7 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 8 ---------------------------------- -->
+
+<div class="sect1">
+      <h2 id="_part_8">Part 8</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Find the words given below and highlight them on the grid in two separate images. 
+               <ol type="a">
+                  <li>"LINEAR"</li>
+                  <li>"ALGEBRA" (it is spelled in reverse)</li>
+               </ol>
+            </p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:33%;">
+            <col style="width:33%;">
+            <col style="width:33%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" colspan="2">
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_8/p8_search.png" alt="p8_search.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 8a image -->
+                           <img src="p8_colored_a.png" alt="p8_colored_a.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                              <!-- MAKE CHANGES HERE: Part 8b image -->
+                              <img src="p8_colored_b.png" alt="p8_colored_b.png" width="100%">
+                              <!-- END CHANGES -->
+                           </span>
+                        </p>
+                     </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Part 8 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="p8_code.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END PART 8 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 9 ---------------------------------- -->
+
+<div class="sect1">
+      <h2 id="_part_9">Part 9</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Find all words and highlight them in different colors.</p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_9/p9_search.png" alt="p9_search.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 9 image -->
+                           <img src="colored_all_words.png" alt="colored_all_words.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top" colspan="2">
+                     <div class="codetext">
+                        
+                        <h3><strong>Words to Find:</strong></h3>
+                        <p style="color:black;">
+CUBIC, VARIABLE, QUADRATIC, ROOT, TRINOMIAL, 
+BINOMIAL, ZERO, DEGREE, MONOMIAL, CONSTANT, 
+LINEAR, ALGEBRA, EQUATION.
+                        </p>
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Part 9 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="p9_code.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END PART 9 ----------------------------------- -->
+
+<!-- ---------------------------------- START PART 10 ---------------------------------- -->
+
+<div class="sect1">
+      <h2 id="_part_10">Part 10</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Find all words and highlight them in different colors. Repeat this for each of the three puzzles and their noisy variants.</p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:33%;">
+            <col style="width:33%;">
+            <col style="width:33%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_10/p10_search1.png" alt="p10_search1.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_10/p10_search2.png" alt="p10_search2.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_10/p10_search3.png" alt="p10_search3.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 10 search 1 -->
+                           <img src="colored_p10_search1.png" alt="colored_p10_search1.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                              <!-- MAKE CHANGES HERE: Part 10 search 2 -->
+                              <img src="colored_p10_search2.png" alt="colored_p10_search2.png" width="100%">
+                              <!-- END CHANGES -->
+                           </span>
+                        </p>
+                     </td>
+                     <td class="tableblock halign-left valign-top" >
+                           <p class="tableblock">
+                              <span class="image">
+                                 <!-- MAKE CHANGES HERE: Part 10 search 3 -->
+                                 <img src="colored_p10_search3.png" alt="colored_p10_search3.png" width="100%">
+                                 <!-- END CHANGES -->
+                              </span>
+                           </p>
+                        </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_10/p10_noisy_search1.png" alt="p10_noisy_search1.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_10/p10_noisy_search2.png" alt="p10_noisy_search2.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_10/p10_noisy_search3.png" alt="p10_noisy_search3.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Part 10 search 1 -->
+                           <img src="colored_p10_noisy_search1.png" alt="colored_p10_noisy_search1.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                              <!-- MAKE CHANGES HERE: Part 10 search 2 -->
+                              <img src="colored_p10_noisy_search2.png" alt="colored_p10_noisy_search2.png" width="100%">
+                              <!-- END CHANGES -->
+                           </span>
+                        </p>
+                     </td>
+                     <td class="tableblock halign-left valign-top" >
+                           <p class="tableblock">
+                              <span class="image">
+                                 <!-- MAKE CHANGES HERE: Part 10 search 3 -->
+                                 <img src="colored_p10_noisy_search3.png" alt="colored_p10_noisy_search3.png" width="100%">
+                                 <!-- END CHANGES -->
+                              </span>
+                           </p>
+                        </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top">
+                     <div class="codetext">
+                        <h3><strong>Words to Find in Types of Dogs:</strong></h3>
+                        <p style="color:black;">
+DALMATION, DACHSHUND, BEAGLE, PINSCHER, 
+SHEPHERD, MASTIFF, SETTER, CHIHUAHUA, 
+BULLDOG, COLLIE, HOUND, CORGI, TERRIER, BOXER.
+                        </p>
+                     </div>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                     <div class="codetext">
+                        <h3><strong>Words to Find in Fruits:</strong></h3>
+                        <p style="color:black;">
+RASPBERRY, LIME, BLACKBERRY, BLUEBERRY, 
+WATERMELON, ORANGE, BANANA, PAPAYA, LEMON,
+KIWI, STRAWBERRY, GRAPE, APPLE.</p>
+                     </div>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                     <div class="codetext">
+                        <h3><strong>Words to Find in School Life:</strong></h3>
+                        <p style="color:black;">
+GLITTER, SHARPENER, HOMEWORK, JOURNAL, 
+ERASER, BLACKBOARD, NOTEBOOK, BACKPACK,
+CRAYONS, SCISSORS, GLUESTICK, MARKERS,
+BOOKS, CALCULATOR, COMPASS, PENS.</p>
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Part 10 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="p10_code.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+
+<!-- ----------------------------------- END PART 10 ----------------------------------- -->
+
+
+<!-- ---------------------------------- START EC 1 ---------------------------------- -->
+<div class="sect1">
+      <h2 id="_part_EC1">Extra Credit 1</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Write a program to: 1) read and output the word list that is adjacent to the grid; and 2) use the automatically extracted word list to find and highlight all words in the grid. Color each word with a different random color and then scratch it from the word list in the image using a horizontal line with the same color. </p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <col style="width:50%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_EC_1/ec1_search.png" alt="ec1_search.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Extra Credit 1 image -->
+                           <img src="ec1_1_k.png" alt="ec1_1_k.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+               </tr>
+               <tr>             
+                  <td class="tableblock halign-left valign-top" colspan="2">
+                     <!-- MAKE CHANGES HERE: output of the word extraction program-->
+                     <Pre class="codetext" style="color:black;">
+<strong>Star Wars</strong>
+This just highlights the Ks.... Could crop the other letters and repeat, then apply p9 code to solve.
+                     </Pre>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Extra Credit 1 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="Part_EC_1/ec1_code.cpp"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END EC1 ----------------------------------- -->
+
+<!-- ---------------------------------- START EC2 ---------------------------------- -->
+<div class="sect1">
+      <h2 id="_part_EC2">Extra Credit 2</h2>
+      <div class="sectionbody">
+         <div class="paragraph">
+            <p>Extend your program from Extra Credit Part 1 to work with these cellphone images of word search puzzles.</p>
+         </div>
+         <table class="tableblock frame-all grid-all" style=" width:100%; ">
+            <col style="width:33%;">
+            <col style="width:33%;">
+            <col style="width:33%;">
+            <tbody>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock"><span class="image">
+                           <img src="Part_EC_2/ec2_search1.png" alt="ec2_search1.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                              <img src="Part_EC_2/ec2_search2.png" alt="ec2_search1.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                              <img src="Part_EC_2/ec2_search3.png" alt="ec2_search1.png" width="100%">
+                           </span>
+                        </p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top" >
+                     <p class="tableblock">
+                        <span class="image">
+                           <!-- MAKE CHANGES HERE: Extra Credit search 1 -->
+                           <img src="bw_ec1.png" alt="bw_ec1.png" width="100%">
+                           <!-- END CHANGES -->
+                        </span>
+                     </p>
+                  </td>
+                  <td class="tableblock halign-left valign-top" >
+                        <p class="tableblock">
+                           <span class="image">
+                              <!-- MAKE CHANGES HERE: Extra Credit search 2 -->
+                              <img src="placeholders/search_placeholder.jpg" alt="placeholder.jpg" width="100%">
+                              <!-- END CHANGES -->
+                           </span>
+                        </p>
+                     </td>
+                     <td class="tableblock halign-left valign-top" >
+                           <p class="tableblock">
+                              <span class="image">
+                                 <!-- MAKE CHANGES HERE: Extra Credit search 3 -->
+                                 <img src="placeholders/search_placeholder.jpg" alt="placeholder.jpg" width="100%">
+                                 <!-- END CHANGES -->
+                              </span>
+                           </p>
+                        </td>
+               </tr>
+               <tr>
+                  <td class="tableblock halign-left valign-top">
+                     <div class="codetext">
+                        <h3><strong>Star Wars Word Search:</strong></h3>
+                        <p style="color:black;">
+                        This is just converting to B/W version... would take many more hours to get fully functional with EC1/P9 code....
+                        </p>
+                     </div>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                     <div class="codetext">
+                        <h3><strong>Most Common Pets Word Search:</strong></h3>
+                        <p style="color:black;">
+                        Apply same code as image 1
+                        </p>
+                     </div>
+                  </td>
+                  <td class="tableblock halign-left valign-top">
+                     <div class="codetext">
+                        <h3><strong>Human Bones Word Search:</strong></h3>
+                        <p style="color:black;">
+                        Could detect edges and then transform the image to be normal to the view... then apply EC1/p9 code...
+                        </p>
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="listingblock">
+            <div class="title">Source</div>
+            <div class="content monospaced">
+               <!-- MAKE CHANGES HERE: Extra Credit 2 code -->
+               <div class="codetext">
+                  <object class="codeobject" type="text/html" data="ec1_code_k.py"></object>
+               </div>
+               <!-- END CHANGES -->
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ----------------------------------- END EC2 ----------------------------------- -->
+
+      <div id="footer">
+         <div id="footer-text">
+            Last updated: 2019-01-24
+         </div>
+      </div>
+   </body>
+</html>
